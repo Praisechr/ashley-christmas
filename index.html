@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Christmas Surprise 🎄</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+    }
+
+    /* Snow */
+    .snow {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 14px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+
+    /* Gift box */
+    .gift {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gift:hover {
+      transform: scale(1.05);
+    }
+
+    .gift h1 {
+      color: #b71c1c;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      display: none;
+      max-width: 420px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tree {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: none;
+      background: #b71c1c;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Gift -->
+<div class="gift" onclick="openGift()">
+  <h1>🎁 Click to open</h1>
+  <p>A Christmas surprise awaits</p>
+</div>
+
+<!-- Card -->
+<div class="gift card" id="card">
+  <div class="tree">🎄✨</div>
+  <h1>Merry Christmas, Ashley</h1>
+  <p>
+    This little page was coded just for you —  
+    not to impress, but to remind you  
+    that you’re genuinely appreciated.
+  </p>
+  <p>
+    May this Christmas be gentle with you,  
+    warm in ways words can’t explain,  
+    and filled with quiet happiness.
+  </p>
+  <div class="footer">
+    — From Penny 💝
+  </div>
+
+  <button onclick="toggleMusic()">🎶 Toggle Music</button>
+</div>
+
+<!-- Music -->
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-tenderness.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  function openGift() {
+    document.querySelector('.gift').style.display = 'none';
+    document.getElementById('card').style.display = 'block';
+    document.getElementById('music').play();
+  }
+
+  function toggleMusic() {
+    const music = document.getElementById('music');
+    if (music.paused) music.play();
+    else music.pause();
+  }
+
+  // Snow generator
+  function createSnow() {
+    const snow = document.createElement('div');
+    snow.className = 'snow';
+    snow.innerText = '❄';
+    snow.style.left = Math.random() * window.innerWidth + 'px';
+    snow.style.animationDuration = (3 + Math.random() * 5) + 's';
+    snow.style.fontSize = (10 + Math.random() * 20) + 'px';
+    document.body.appendChild(snow);
+
+    setTimeout(() => snow.remove(), 8000);
+  }
+
+  setInterval(createSnow, 200);
+</script>
+
+</body>
+</html>
